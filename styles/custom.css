@@ -1,0 +1,102 @@
+a { color: #000000; }
+
+.navbar .brand {color: #ffffff}
+/*.well {background-color: #00A7CF}*/
+.alert {display: none}
+
+#map_canvas img {
+  max-width: none;
+}
+
+.filter-box { 
+  height: 15px; 
+  width: 15px;  
+  display: inline-block;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box; 
+}
+
+.filter-yellow { background-color: #FBF358; }
+.filter-green { background-color: #00E13C; }
+.filter-blue { background-color: #5781FC; }
+.filter-purple { background-color: #7C54FB; }
+.filter-red { background-color: #FB6353; }
+
+canvas {-ms-touch-action: double-tap-zoom;}
+
+#resultWell
+{
+  display: anything;
+  padding: 0px;
+}
+
+
+
+#resultlist, #resultListPoly
+{
+    font-weight: normal;
+    font-size: 10px;
+    max-height: 200px;
+    overflow: auto;
+    background-color: #F9FBFF;
+    
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /*
+    min-width: 300px;
+    display: none;
+    */
+    
+    border: solid 1px #ECF2FF;
+    
+}
+
+
+#resultListPoly table, #resultList table
+{
+    
+    color: #3B4A66;
+    text-align: left;
+    font-family: arial, san-serif;
+    font-size: 12px;
+    width: 100%;
+    /*min-width: 300px;*/
+    max-width: 300px;
+    border: 1px solid #999999;
+    margin-bottom: 0px;
+    
+}
+.navbar-inner {
+  background-color: #00A7CF; /* background color will be black for all browsers */
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+#resultListPoly tr, #resultList tr
+{
+     border: 10px solid #999999;
+}
+
+#resultListPoly th, #resultList th
+{
+    background-color:#e9f0f8; padding:3px 0px 3px 5px; font-weight:bold; text-align: left; border: 1px solid #999999;}
+    
+#resultListPoly hr, #resultList hr
+{
+    color:#e9f0f8; background-color: #e9f0f8; height:1px; border:none; padding:0px; margin:0px;}    
+ 
+#resultListPoly td, #resultList td
+{  
+	text-align: left;
+  	padding:3px 0px 3px 5px; 
+        border: 1px solid #999999;
+}  
+
+	
