@@ -8,7 +8,7 @@
  *
  * Date: 12/10/2012
  *
- * Commit Test
+ *
  */
 
 // Enable the visual refresh
@@ -50,91 +50,87 @@ var MapsLib = {
   
   initialize: function() {
     $( "#result_count" ).html("");
-var grayStyles = [
-  {
-    "featureType": "road",
-    "elementType": "geometry.fill",
-    "stylers": [
-    { "lightness": 1 },
-    { "saturation": -100 }
+    var grayStyles = [
+      {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+        { "lightness": 1 },
+        { "saturation": -100 }
+        ]
+      },{
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry.stroke",
+        "stylers": [
+        { "saturation": -100 },
+        { "visibility": "off" }
+        ]
+      },{
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+        { "visibility": "off" }
+        ]
+      },{
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+        { "color": "#808080" },
+        { "lightness": 50 }
+        ]
+      },{
+        "featureType": "road",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+        { "saturation": -100 },
+        { "gamma": 9.91 }
+        ]
+      },{
+        "featureType": "landscape",
+        "stylers": [
+        { "saturation": -70 }
+        ]
+      },{
+        "featureType": "administrative",
+        "stylers": [
+        { "visibility": "on" }
+        ]
+      },{
+        "featureType": "poi",
+        "stylers": [
+        { "saturation": -50 }
+        ]
+      },{
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+        { "saturation": -70 }
+        ]
+      },{
+        "featureType": "transit",
+        "stylers": [
+        { "saturation": -70 }
+        ]
+      }
     ]
-  },{
-    "featureType": "road.highway.controlled_access",
-    "elementType": "geometry.stroke",
-    "stylers": [
-    { "saturation": -100 },
-    { "visibility": "off" }
-    ]
-  },{
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [
-    { "visibility": "off" }
-    ]
-  },{
-    "featureType": "road.local",
-    "elementType": "geometry.fill",
-    "stylers": [
-    { "color": "#808080" },
-    { "lightness": 50 }
-    ]
-  },{
-    "featureType": "road",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-    { "saturation": -100 },
-    { "gamma": 9.91 }
-    ]
-  },{
-    "featureType": "landscape",
-    "stylers": [
-    { "saturation": -70 }
-    ]
-  },{
-    "featureType": "administrative",
-    "stylers": [
-    { "visibility": "on" }
-    ]
-  },{
-    "featureType": "poi",
-    "stylers": [
-    { "saturation": -50 }
-    ]
-  },{
-    "featureType": "road",
-    "elementType": "labels",
-    "stylers": [
-    { "saturation": -70 }
-    ]
-  },{
-    "featureType": "transit",
-    "stylers": [
-    { "saturation": -70 }
-    ]
-  }
-]
 	
 	
     geocoder = new google.maps.Geocoder();
     var myOptions = {
-  styles:                   grayStyles,
-  zoom:                     10,
-  //center:                   chicago,
-  //disableDefaultUI:       true,
-  scrollwheel:              false,
-  navigationControl:        true,
-  panControl:               false,
-  zoomControl:              true,
-  scaleControl:             true,
-  mapTypeControl:           true,
-  mapTypeControlOptions: {
-    style:                  google.maps.MapTypeControlStyle.DROPDOWN_MENU
-  },
-  //navigationControlOptions: {style: google.maps.NavigationControlStyle.LARGE },
- 
-	
-	
- 
+      styles:                   grayStyles,
+      zoom:                     10,
+      //center:                   chicago,
+      //disableDefaultUI:       true,
+      scrollwheel:              false,
+      navigationControl:        true,
+      panControl:               false,
+      zoomControl:              true,
+      scaleControl:             true,
+      mapTypeControl:           true,
+      mapTypeControlOptions: {
+        style:                  google.maps.MapTypeControlStyle.DROPDOWN_MENU
+      },
+
       center: MapsLib.map_centroid,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -160,7 +156,7 @@ var grayStyles = [
     $("#result_count").hide();
     
     //-----custom initializers-------
-    nosearchwell = true;
+
     //-----end of custom initializers-------
 
     //run the default search
@@ -179,7 +175,14 @@ var grayStyles = [
     var whereClause = MapsLib.locationColumn + " not equal to ''";
 
     //-----custom filters-------
-
+    var type_column = "'Type'";
+    var searchType = type_column + " IN (-1,";
+//    if ( $("#cbType1").is(':checked')) searchType += "1,";
+//    if ( $("#cbType2").is(':checked')) searchType += "2,";
+//    if ( $("#cbType3").is(':checked')) searchType += "3,";
+//    if ( $("#cbType4").is(':checked')) searchType += "4,";
+    whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
+    console.log(whereClause);
     //-------end of custom filters--------
 
     if (address !== "") {
@@ -211,6 +214,8 @@ var grayStyles = [
 
           whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
 
+          console.log(whereClause);
+          
           MapsLib.drawSearchRadiusCircle(MapsLib.currentPinpoint);
           MapsLib.submitSearch(whereClause, map, MapsLib.currentPinpoint);
         }
@@ -220,6 +225,7 @@ var grayStyles = [
       });
     }
     else { //search without geocoding callback
+      console.log(whereClause);
       MapsLib.submitSearch(whereClause, map);
     }
   },
