@@ -8,6 +8,7 @@
  *
  * Date: 12/10/2012
  *
+ * Commit Test
  */
 
 // Enable the visual refresh
